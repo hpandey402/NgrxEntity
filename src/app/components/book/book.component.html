@@ -1,0 +1,30 @@
+<ng-container *ngIf="loading$|async as loading">
+    <div class="spinner-border text-warning d-block my-4" role="status">
+       <span class="visually-hidden">Loading...</span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="error$|async as error">
+     <p>
+       Error has occured
+     </p> 
+  </ng-container>
+
+  <ng-container *ngIf="currentBook$|async as currentBook">
+  
+   <app-selected-book [book]="currentBook"></app-selected-book>
+  </ng-container>
+ 
+
+  
+ <button class="btn btn-primary my-3" (click)="onAddBook()">Add more 📕</button>
+ 
+ <ng-container *ngIf="books$|async as books">
+   <!-- call select-book component here -->
+    <app-book-list 
+     [books]="books"
+     (selectBook)="onBookSelect($event)" 
+     (updateBook)="onBookUpdate($event)"
+     (removeBook)="onBookRemove($event)">
+    </app-book-list>
+ </ng-container>
